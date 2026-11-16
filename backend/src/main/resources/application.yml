@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: chamas-academy-backend
+  profiles:
+    active: default
+
+  jpa:
+    open-in-view: false
+
+  # In the default initialization profile, DataSource & JPA auto-configurations are safely
+  # excluded so that the application and its health check run without requiring active MySQL credentials.
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration
+      - org.springframework.boot.jdbc.autoconfigure.DataSourceTransactionManagerAutoConfiguration
+      - org.springframework.boot.jdbc.autoconfigure.DataSourceInitializationAutoConfiguration
+      - org.springframework.boot.hibernate.autoconfigure.HibernateJpaAutoConfiguration
