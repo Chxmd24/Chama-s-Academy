@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Chama's Academy | Indoor Cricket & Football Stadium",
+  title: "Chama's Academy | Where Champions Train & Play",
   description:
-    "Chama's Academy is a premier indoor cricket and football stadium featuring slot booking, live match scoring, and tournament management.",
+    "Experience premium indoor cricket and football facilities at Chama's Academy. Book your game, compete with friends, and follow live match scores.",
 };
 
 export default function RootLayout({
@@ -24,8 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="min-h-screen bg-slate-950 text-slate-100 antialiased font-sans">
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} scroll-smooth`}>
+      <body className="min-h-screen bg-[#0B1426] text-white antialiased font-sans selection:bg-[#D4AF37]/30 selection:text-[#D4AF37]">
         {children}
       </body>
     </html>
