@@ -61,6 +61,12 @@ lerna-debug.log*
 backend/.env
 frontend/.env
 !.env.example
+backend/src/main/resources/application-local.yml
+backend/src/main/resources/application-local.properties
+backend/config/
+**/config/application-local.yml
+**/application-local.yml
+**/application-local.properties
 *.pem
 *.key
 

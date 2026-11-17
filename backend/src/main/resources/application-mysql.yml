@@ -1,26 +1,38 @@
 # ===================================================================
-# Chama's Academy - MySQL 8.0 Production / Staging Profile
+# Chama's Academy - MySQL 8.0 Profile
 #
 # Activation methods:
 # 1. Command Line: java -jar backend.jar --spring.profiles.active=mysql
 # 2. Environment Variable: SPRING_PROFILES_ACTIVE=mysql
-# 3. application.yml: spring.profiles.active: mysql
+# 3. Maven Run: mvn spring-boot:run -Dspring-boot.run.profiles=mysql
 # ===================================================================
 spring:
   config:
     activate:
       on-profile: mysql
+    import:
+      # Git-ignored local configuration sources outside src/main/resources
+      - "optional:file:./config/application-local.yml"
+      - "optional:file:./backend/config/application-local.yml"
+      - "optional:file:../config/application-local.yml"
 
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/chamas_academy?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
-    username: ${SPRING_DATASOURCE_USERNAME:root}
+    username: ${SPRING_DATASOURCE_USERNAME:chamas_user}
     password: ${SPRING_DATASOURCE_PASSWORD:}
     driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      pool-name: ChamasAcademyHikariPool
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 10000
+      idle-timeout: 300000
+      max-lifetime: 1800000
 
   jpa:
     open-in-view: false
     hibernate:
-      # Protect database integrity by validating schema without altering or dropping tables
+      # Validates entity mappings against database schema without modifying or dropping tables
       ddl-auto: validate
     show-sql: false
     properties:

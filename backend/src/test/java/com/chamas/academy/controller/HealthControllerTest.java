@@ -21,7 +21,7 @@ class HealthControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName("GET /api/health should return 200 OK with expected JSON body")
+    @DisplayName("GET /api/health should return 200 OK with NOT_CONFIGURED database status in default profile without exposing credentials")
     void shouldReturnHealthStatusOk() throws Exception {
         mockMvc.perform(get("/api/health")
                 .accept(MediaType.APPLICATION_JSON))
@@ -29,11 +29,15 @@ class HealthControllerTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.status").value("UP"))
                 .andExpect(jsonPath("$.application").value("Chama's Academy Backend"))
-                .andExpect(jsonPath("$.message").value("Backend is running successfully"));
+                .andExpect(jsonPath("$.message").value("Backend is running successfully"))
+                .andExpect(jsonPath("$.database").value("NOT_CONFIGURED"))
+                .andExpect(jsonPath("$.password").doesNotExist())
+                .andExpect(jsonPath("$.username").doesNotExist())
+                .andExpect(jsonPath("$.url").doesNotExist());
     }
 
     @Test
-    @DisplayName("GET /api/protected should reject unauthenticated requests")
+    @DisplayName("GET /api/protected should reject unauthenticated requests with 403 Forbidden")
     void shouldRejectUnauthenticatedRequestToProtectedPath() throws Exception {
         mockMvc.perform(get("/api/protected")
                 .accept(MediaType.APPLICATION_JSON))
