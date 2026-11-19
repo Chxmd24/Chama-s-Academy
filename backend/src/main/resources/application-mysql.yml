@@ -29,6 +29,17 @@ spring:
       idle-timeout: 300000
       max-lifetime: 1800000
 
+  flyway:
+    # Disabled by default until migration execution is explicitly approved and triggered
+    enabled: ${SPRING_FLYWAY_ENABLED:false}
+    baseline-on-migrate: true
+    baseline-version: 0
+    url: ${SPRING_FLYWAY_URL:${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/chamas_academy?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}}
+    user: ${SPRING_FLYWAY_USER:chamas_migrator}
+    password: ${SPRING_FLYWAY_PASSWORD:}
+    locations:
+      - classpath:db/migration
+
   jpa:
     open-in-view: false
     hibernate:

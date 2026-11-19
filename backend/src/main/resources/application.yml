@@ -5,5 +5,23 @@ spring:
   application:
     name: chamas-academy-backend
 
+  config:
+    import:
+      # Git-ignored local configuration sources outside src/main/resources
+      - "optional:file:./config/application-local.yml"
+      - "optional:file:./backend/config/application-local.yml"
+      - "optional:file:../config/application-local.yml"
+
+  # Flyway disabled by default to prevent unexpected live database migrations
+  flyway:
+    enabled: false
+
   jpa:
     open-in-view: false
+
+chamas:
+  jwt:
+    expiration-ms: ${CHAMAS_JWT_EXPIRATION_MS:86400000}
+    secret: ${CHAMAS_JWT_SECRET:}
+  security:
+    trusted-proxy-enabled: ${CHAMAS_TRUSTED_PROXY_ENABLED:false}

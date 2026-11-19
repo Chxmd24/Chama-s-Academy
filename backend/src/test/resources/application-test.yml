@@ -14,3 +14,12 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
+  flyway:
+    enabled: false
+
+chamas:
+  jwt:
+    expiration-ms: 86400000
+    secret: "dGVzdC1zZWNyZXQta2V5LWZvci1jaGFtYXMtYWNhZGVteS1hdXRoZW50aWNhdGlvbi0yNTYtYml0cyE="
+  security:
+    trusted-proxy-enabled: false

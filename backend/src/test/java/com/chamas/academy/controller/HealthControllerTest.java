@@ -37,10 +37,10 @@ class HealthControllerTest {
     }
 
     @Test
-    @DisplayName("GET /api/protected should reject unauthenticated requests with 403 Forbidden")
+    @DisplayName("GET /api/protected should reject unauthenticated requests with 401 Unauthorized")
     void shouldRejectUnauthenticatedRequestToProtectedPath() throws Exception {
         mockMvc.perform(get("/api/protected")
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isForbidden());
+                .andExpect(status().isUnauthorized());
     }
 }
